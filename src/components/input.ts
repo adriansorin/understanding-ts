@@ -1,28 +1,19 @@
 import autobind from "../decorators/autobind.js";
 import { validate, Validatable } from "./validate.js";
 import projectState from "./state.js";
+import BaseComponent from "./base.js";
 
 // ProjectInput Class
-export default class ProjectInput {
-  templateElement: HTMLTemplateElement;
-  hostElement: HTMLDivElement;
-  element: HTMLFormElement;
+export default class ProjectInput extends BaseComponent<
+  HTMLDivElement,
+  HTMLFormElement
+> {
   titleInputElementField: HTMLInputElement;
   descriptionInputElementField: HTMLInputElement;
   peopleInputElementField: HTMLInputElement;
 
   constructor() {
-    this.templateElement = document.getElementById(
-      "project-input"
-    )! as HTMLTemplateElement;
-    this.hostElement = document.getElementById("app")! as HTMLDivElement;
-
-    const importedNode = document.importNode(
-      this.templateElement.content,
-      true
-    );
-    this.element = importedNode.firstElementChild as HTMLFormElement;
-    this.element.id = "user-input";
+    super("project-input", "app", true, "user-input");
 
     this.titleInputElementField = this.element.querySelector(
       "#title"
@@ -35,7 +26,6 @@ export default class ProjectInput {
     ) as HTMLInputElement;
 
     this.configure();
-    this.attach();
   }
 
   private getUserInput(): [string, string, number] | void {
@@ -91,11 +81,9 @@ export default class ProjectInput {
     this.peopleInputElementField.value = "";
   }
 
-  private configure() {
+  configure() {
     this.element.addEventListener("submit", this.submitHandler);
   }
 
-  private attach() {
-    this.hostElement.insertAdjacentElement("afterbegin", this.element);
-  }
+  renderContent() {}
 }

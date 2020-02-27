@@ -1,8 +1,25 @@
+
+import Project from '../types/project.js';
+import ProjectStatus from '../types/projectStatus.js';
+import Listener from '../types/listener.js';
+
+// Base State Management class
+export class State<T> {
+    protected listeners: Listener<T>[] = [];
+
+    addListener(listenerFn: Listener<T>) {
+        this.listeners.push(listenerFn);
+    }
+}
 // Projects State Management
 
-class ProjectState {
-    private projects: any[] = [];
+class ProjectState extends State<Project> {
+    private projects: Project[] = [];
     private static instance: ProjectState;
+
+    private constructor() {
+        super();
+    }
 
     static getInstance() {
         if (this.instance) {
@@ -14,14 +31,18 @@ class ProjectState {
     }
 
     addProject(title: string, description: string, numberOfPeople: number) {
-        const newProject = {
+        const newProject: Project = {
             id: Math.random().toString(),
             title,
             description,
-            people: numberOfPeople
-        }
+            people: numberOfPeople,
+            status: ProjectStatus.Active
+        };
 
         this.projects.push(newProject);
+        for (const listenerFn of this.listeners) {
+            listenerFn(this.projects.slice());
+        }
     }
 }
 
