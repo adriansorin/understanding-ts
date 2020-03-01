@@ -2,6 +2,7 @@ import projectState from "./state.js";
 import Project from "../types/project.js";
 import ProjectStatus from "../types/projectStatus.js";
 import BaseComponent from "./base.js";
+import ProjectItem from "./item.js";
 
 // ProjectList class
 export default class ProjectList extends BaseComponent<
@@ -23,9 +24,7 @@ export default class ProjectList extends BaseComponent<
     )! as HTMLUListElement;
     listEl.textContent = "";
     for (const prjItem of this.assignedProjects) {
-      const listItem = document.createElement("li");
-      listItem.textContent = prjItem.title;
-      listEl.appendChild(listItem);
+      new ProjectItem(this.element.querySelector('ul')!.id, prjItem);
     }
   }
 
