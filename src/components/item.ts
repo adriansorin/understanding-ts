@@ -1,5 +1,5 @@
-import BaseComponent from "./base.js";
-import Project from "../types/project.js";
+import BaseComponent from "./base";
+import Project from "../types/project";
 
 export default class ProjectItem extends BaseComponent<
   HTMLUListElement,

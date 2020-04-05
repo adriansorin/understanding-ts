@@ -1,7 +1,7 @@
 
-import Project from '../types/project.js';
-import ProjectStatus from '../types/projectStatus.js';
-import Listener from '../types/listener.js';
+import Project from '../types/project';
+import ProjectStatus from '../types/projectStatus';
+import Listener from '../types/listener';
 
 // Base State Management class
 export class State<T> {

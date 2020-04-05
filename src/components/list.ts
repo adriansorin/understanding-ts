@@ -1,8 +1,8 @@
-import projectState from "./state.js";
-import Project from "../types/project.js";
-import ProjectStatus from "../types/projectStatus.js";
-import BaseComponent from "./base.js";
-import ProjectItem from "./item.js";
+import projectState from "./state";
+import Project from "../types/project";
+import ProjectStatus from "../types/projectStatus";
+import BaseComponent from "./base";
+import ProjectItem from "./item";
 
 // ProjectList class
 export default class ProjectList extends BaseComponent<

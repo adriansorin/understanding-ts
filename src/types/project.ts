@@ -1,4 +1,4 @@
-import ProjectStatus from './projectStatus.js';
+import ProjectStatus from './projectStatus';
 
 export default interface Project {
     id: string,
